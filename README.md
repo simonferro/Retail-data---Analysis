@@ -29,3 +29,4 @@ https://medium.com/@ulasturker/customer-life-time-value-calculations-with-python
 https://medium.com/@rafiqairwandi/rfm-analysis-using-postgresql-2e5c1fe42d6
 http://www.silota.com/docs/recipes/sql-recency-frequency-monetary-rfm-customer-analysis.html
 https://joaocorreia.io/blog/rfm-analysis-increase-sales-by-segmenting-your-customers.html
+https://towardsdatascience.com/who-is-your-golden-goose-cohort-analysis-50c9de5dbd31
