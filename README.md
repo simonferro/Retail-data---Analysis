@@ -28,3 +28,4 @@ https://www.google.com/search?q=https%3A%2F%2Farchive.ics.uci.edu%2Fml%2Fdataset
 https://medium.com/@ulasturker/customer-life-time-value-calculations-with-python-cltv-with-crm-analytics-2-in-data-science-7d39ca9ad2de
 https://medium.com/@rafiqairwandi/rfm-analysis-using-postgresql-2e5c1fe42d6
 http://www.silota.com/docs/recipes/sql-recency-frequency-monetary-rfm-customer-analysis.html
+https://joaocorreia.io/blog/rfm-analysis-increase-sales-by-segmenting-your-customers.html
