@@ -2,16 +2,19 @@
 
 We can start by analyzing the purchasing behavior of customers through a cohort analysis, which can be done based on the raw tables using any SQL engine.
 
-For this, the final result must be a table where each row n contains the starting date of a group of customers and each column m contains the difference in periods between the starting 
-date and the respective column. Each cell represents the amount/percentage of users/dollars that started in period n and are still present in the period m.
+For this, the final result must be a table where each row n represents a group of customers with a common starting date and each column m contains the difference in periods between the starting 
+date and the respective column. Each cell represents the amount/percentage of users/dollars that started in period n and are still present in the period m. 
 
-Therefore, the first thing we can do in SQL is calculate the first_purchase for each user. In this case, I have used a function from bigquery called ARRAY_AGG. It is important to mention that
+In this file, I will go through the process of creating the cohort analysis and link the respective query for that step immediately below. Keep in mind that the actual
+SQL code you would run would have all the specific steps together, and I prefer writing each step as a subquery. You can see this file in the CohortAnalysis folder.
+
+The first thing we can do in SQL is calculate the first_purchase for each user. In this case, I have used a function from bigquery called ARRAY_AGG. It is important to mention that
 the choice of period for this analysis is critical. If we choose a very short period, such as days, the values will fluctuate a lot and will be very small compared to the initial cohort size. If
 on the other hand we use years as the periods, the timeframe might not be long enough to get meaningful insights. In this analysis we will use months as period.
 
-Using ARRAY_AGG we can extract the row representing the first purchase for each user:
+Using ARRAY_AGG we can extract the row representing the first purchase for each user. This will return the first row in chronological order for each user:
 
-/* 
+*/ 
 
 WITH first_purchase AS 
 ( 
@@ -23,7 +26,8 @@ GROUP BY
     CustomerID 
 ) 
  
-/* And afterwards get the date and customerId from that first purchase. 
+/* 
+From these rows, we can get the date and customerId of that first purchase. 
 */
  
 , first_cohort AS 
@@ -33,6 +37,11 @@ SELECT
 FROM  
     first_purchase  
 ), 
+
+/*
+
+
+*/
 all_cohort_dates AS 
 ( 
 SELECT  
