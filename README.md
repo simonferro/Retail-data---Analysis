@@ -14,6 +14,12 @@ The objective of this analysis will be two-fold. First, we will generate a cohor
 
 This cohort analysis can be done from a user or from a net dollar view, and it can represent the retention compared to the first period or the total values (ex. Total customers in period n)
 
+*RFM Analysis:* RFM analysis is a common methodology used in industries where purchases are not recurrent. Contrary to what happens for SAAS businesses, retail and commerce businesses do not receive a predictable, consistent periodical payment from their customers. Instead, purchases are one-off, and the purchase frequency can vary significantly between customers. RFM analysis proposes a split between customers based on 3 different attributes calculated from their orders: Frequency, Recency and Monetary value. The recency refers to how much time passed since a customers' last order, while monetary value refers to the total value received from the customer in the studied period. Frequency is related to the total number of orders in the period studied for a specific customer.
+
+Based on these three properties, customers are then split into different segments, where each segment can be analyzed separately . For example, customers with high monetary value but who purchased a long time ago might be good candidates for a promotional message, while users with high frequency and recency but low monetary value could be targeted with cross-selling initiatives. 
+
+In most applications of RFM, customers are split into four bins for each of the three "features", therefore, there are 64 different buckets where a customer could be placed in this RFM "3D" space. In general, the split between the four buckets for each of the features is based on percentiles.
+
 **Understanding of the Dataset**
 
 The dataset has around 500000 rows, which represent transactions between 01/12/2010 and 09/12/2011. Nonetheless, around 100k transactions have a null CustomerId. Each row in the dataset represents a product sold. Therefore, there can be multiple lines for each unique purchase if the purchase is composed of multiple items 
