@@ -11,92 +11,97 @@ on the other hand we use years as the periods, the timeframe might not be long e
 
 Using ARRAY_AGG we can extract the row representing the first purchase for each user:
 
-WITH first_purchase AS
-(
-SELECT
-     ARRAY_AGG(rs ORDER BY InvoiceDate ASC LIMIT 1)[OFFSET(0)] AS a
-FROM 
-    `cohortanalysis-343816.RetailSales.retailsales` AS rs
-GROUP BY 
-    CustomerID
-)
-
-And afterwards get the date and customerId from that first purchase.
-
-, first_cohort AS
-(
+WITH first_purchase AS 
+( 
 SELECT 
-    a.InvoiceDate, a.CustomerID
-FROM 
-    first_purchase 
-),
-all_cohort_dates AS
-(
+     ARRAY_AGG(rs ORDER BY InvoiceDate ASC LIMIT 1)[OFFSET(0)] AS a 
+FROM  
+    `cohortanalysis-343816.RetailSales.retailsales` AS rs 
+GROUP BY  
+    CustomerID 
+) 
+ 
+And afterwards get the date and customerId from that first purchase. 
+ 
+, first_cohort AS 
+( 
+SELECT  
+    a.InvoiceDate, a.CustomerID 
+FROM  
+    first_purchase  
+), 
+all_cohort_dates AS 
+( 
+SELECT  
+    *    
+FROM  
+     UNNEST 
+        (GENERATE_DATE_ARRAY 
+            (  
+                (SELECT DATE_TRUNC(DATE(MIN(InvoiceDate)),month) 
+                    FROM `cohortanalysis-343816.RetailSales.retailsales`)  
+                ,(SELECT DATE_TRUNC(DATE(MAX(InvoiceDate)),month)  
+                    FROM `cohortanalysis-343816.RetailSales.retailsales`),  
+                 INTERVAL 1 month 
+            )  
+        ) AS month 
+), cohorted_purchases AS 
+( 
+SELECT  
+    cd.*,rs.*,DATE_TRUNC(DATE(fc.InvoiceDate),month) AS initial_cohort,DATE_DIFF(DATE(rs.InvoiceDate), DATE(fc.InvoiceDate), month ) AS period_diff 
+FROM  
+    all_cohort_dates  AS cd 
+LEFT JOIN  
+    `cohortanalysis-343816.RetailSales.retailsales` AS rs ON DATE_TRUNC(DATE(rs.InvoiceDate),month) = cd.month 
+LEFT JOIN  
+    first_cohort AS fc ON fc.CustomerID=rs.CustomerID 
+WHERE  
+    rs.CustomerID IS NOT NULL 
+), 
+values_pre_pivot_total AS 
+( 
+SELECT  
+    initial_cohort, period_diff, count(DISTINCT CustomerID) AS distinct_customers, SUM(Quantity*UnitPrice) AS total_purchases 
+FROM  
+    cohorted_purchases 
+GROUP BY  
+    initial_cohort, period_diff 
+ORDER BY  
+    initial_cohort ASC, period_diff ASC 
+), 
+values_pre_pivot AS 
+( 
 SELECT 
-    *   
-FROM 
-     UNNEST
-        (GENERATE_DATE_ARRAY
-            ( 
-                (SELECT DATE_TRUNC(DATE(MIN(InvoiceDate)),month)
-                    FROM `cohortanalysis-343816.RetailSales.retailsales`) 
-                ,(SELECT DATE_TRUNC(DATE(MAX(InvoiceDate)),month) 
-                    FROM `cohortanalysis-343816.RetailSales.retailsales`), 
-                 INTERVAL 1 month
-            ) 
-        ) AS month
-), cohorted_purchases AS
-(
+    vpp.initial_cohort, 
+    period_diff, 
+    vpp.distinct_customers, 
+    vpp.total_purchases, 
+    round(vpp.distinct_customers/sub.distinct_customers,2) AS customer_retention, 
+    round(vpp.total_purchases/sub.total_purchases,2) AS purchase_retention 
+FROM  
+    values_pre_pivot_total AS vpp 
+LEFT JOIN  
+    ( 
+        SELECT  
+            initial_cohort, 
+            distinct_customers, 
+            total_purchases 
+        FROM 
+            values_pre_pivot_total 
+        WHERE  
+            period_diff=0 
+    ) AS sub 
+ON sub.initial_cohort=vpp.initial_cohort 
+) 
 SELECT 
-    cd.*,rs.*,DATE_TRUNC(DATE(fc.InvoiceDate),month) AS initial_cohort,DATE_DIFF(DATE(rs.InvoiceDate), DATE(fc.InvoiceDate), month ) AS period_diff
-FROM 
-    all_cohort_dates  AS cd
-LEFT JOIN 
-    `cohortanalysis-343816.RetailSales.retailsales` AS rs ON DATE_TRUNC(DATE(rs.InvoiceDate),month) = cd.month
-LEFT JOIN 
-    first_cohort AS fc ON fc.CustomerID=rs.CustomerID
-WHERE 
-    rs.CustomerID IS NOT NULL
-),
-values_pre_pivot_total AS
-(
-SELECT 
-    initial_cohort, period_diff, count(DISTINCT CustomerID) AS distinct_customers, SUM(Quantity*UnitPrice) AS total_purchases
-FROM 
-    cohorted_purchases
-GROUP BY 
-    initial_cohort, period_diff
-ORDER BY 
-    initial_cohort ASC, period_diff ASC
-),
-values_pre_pivot AS
-(
-SELECT
-    vpp.initial_cohort,period_diff,vpp.distinct_customers,vpp.total_purchases, round(vpp.distinct_customers/sub.distinct_customers,2) AS customer_retention, round(vpp.total_purchases/sub.total_purchases,2) AS purchase_retention
-FROM 
-    values_pre_pivot_total AS vpp
-LEFT JOIN 
-    (
-        SELECT 
-            initial_cohort,
-            distinct_customers,
-            total_purchases
-        FROM
-            values_pre_pivot_total
-        WHERE 
-            period_diff=0
-    ) AS sub
-ON sub.initial_cohort=vpp.initial_cohort
-)
-SELECT
-    * 
-FROM -- without this inner select the pivot also gets total_purchases and each total purchase creates an additional row
-    (SELECT 
-        initial_cohort,
-        period_diff,   
-        customer_retention
-    FROM 
-        values_pre_pivot)
-PIVOT
-    (SUM(customer_retention) FOR period_diff IN (0,1,2,3,4,5,6,7,8,9,10,11,12,13))  AS period
+    *  
+FROM -- without this inner select the pivot also gets total_purchases and each total purchase creates an additional row 
+    (SELECT   
+        initial_cohort, 
+        period_diff,    
+        customer_retention 
+    FROM  
+        values_pre_pivot) 
+PIVOT 
+    (SUM(customer_retention) FOR period_diff IN (0,1,2,3,4,5,6,7,8,9,10,11,12,13))  AS period 
 
