@@ -10,23 +10,41 @@ The objective of this analysis will be two-fold. First, we will generate a cohor
 
 **Cohort Analysis and RFM Analysis**
 
-The objective
+*Cohort Analysis:* Cohort analysis is a technique used for analyzing the behavior of a certain group of customers over time. This group of customers will have a common, shared attributed which allows their grouping. Commonly, this attribute is the first purchase or first login date, however attributes like channel, country, etc. can be used to group the customers. The cohort analysis will allow us to see the progression in time of a certain metric for the different groups of customers, helping us spot which groups might be better, where common patterns may occur, and to spot one-off events 
+
+This cohort analysis can be done from a user or from a net dollar view, and it can represent the retention compared to the first period or the total values (ex. Total customers in period n)
 
 **Understanding of the Dataset**
 
+The dataset has around 500000 rows, which represent transactions between 01/12/2010 and 09/12/2011. Nonetheless, around 100k transactions have a null CustomerId. Each row in the dataset represents a product sold. Therefore, there can be multiple lines for each unique purchase if the purchase is composed of multiple items 
+
+Fields:
+
+InvoiceNo: Invoice number which is unique to each transaction.
+StockCode: Product code which is unique to each product.
+Description: Name of the product.
+Quantity: The quantity of items sold per product.
+InvoiceDate: The date and time in which the transaction occurred.
+UnitPrice: Unit price for each of the units sold.
+CustomerID: Unique number assigned to each customer.
+Country: Name of the country where the customer resides.
 
 
 **Sources**:
 
-
+Missing:
+combined rfm score, name of the categories
 https://en.digital/blog/analizando-recurrencia-compra-ecommerce-fidelizacion-rfm/1603
 https://medium.com/@designbynattapong/customer-analytics-and-cohort-analysis-2fbbbba79783
-https://medium.com/swlh/customer-segmentation-in-online-retail-cohort-analysis-eb352085e64b
-https://www.sciencedirect.com/science/article/pii/S1877050910003868
-https://medium.com/mlearning-ai/how-data-science-is-used-in-retail-ad43a2b77f7c
-https://www.google.com/search?q=https%3A%2F%2Farchive.ics.uci.edu%2Fml%2Fdatasets%2Fonline%2Bretail+site%3Amedium.com&sxsrf=APq-WBuwRdkj4qyqX7zE6GDuC_uObjT0bg%3A1646980970480&source=hp&ei=au8qYqGDGpCQxc8P-bGu-Ao&iflsig=AHkkrS4AAAAAYir9epcefqkSt_jYdjZrxmpeU5wznZYO&ved=0ahUKEwih4Madur32AhUQSPEDHfmYC68Q4dUDCAc&uact=5&oq=https%3A%2F%2Farchive.ics.uci.edu%2Fml%2Fdatasets%2Fonline%2Bretail+site%3Amedium.com&gs_lcp=Cgdnd3Mtd2l6EAM6BwgjEOoCECc6BggAEBYQHjoFCCEQoAFQ3QZY8CJgmiRoA3AAeACAAYsBiAGzCpIBBDE2LjKYAQCgAQKgAQGwAQo&sclient=gws-wiz
 https://medium.com/@ulasturker/customer-life-time-value-calculations-with-python-cltv-with-crm-analytics-2-in-data-science-7d39ca9ad2de
 https://medium.com/@rafiqairwandi/rfm-analysis-using-postgresql-2e5c1fe42d6
-http://www.silota.com/docs/recipes/sql-recency-frequency-monetary-rfm-customer-analysis.html
 https://joaocorreia.io/blog/rfm-analysis-increase-sales-by-segmenting-your-customers.html
 https://towardsdatascience.com/who-is-your-golden-goose-cohort-analysis-50c9de5dbd31
+https://towardsdatascience.com/how-to-design-real-time-cohort-analysis-in-python-sql-tableau-1df527c19b7e
+https://rittmananalytics.com/blog/2021/6/20/rfm-analysis-and-customer-segmentation-using-looker-dbt-and-google-bigquery
+https://www.r-bloggers.com/2019/07/customer-segmentation-using-rfm-analysis/
+
+Done:
+https://www.sciencedirect.com/science/article/pii/S1877050910003868
+https://medium.com/swlh/customer-segmentation-in-online-retail-cohort-analysis-eb352085e64b
+http://www.silota.com/docs/recipes/sql-recency-frequency-monetary-rfm-customer-analysis.html
