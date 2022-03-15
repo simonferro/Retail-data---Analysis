@@ -14,7 +14,7 @@ Using ARRAY_AGG we can extract the row representing the first purchase for each 
 WITH first_purchase AS 
 ( 
 SELECT 
-     ARRAY_AGG(rs ORDER BY InvoiceDate ASC LIMIT 1)[OFFSET(0)] AS a 
+      ARRAY_AGG(rs ORDER BY InvoiceDate ASC LIMIT 1)[OFFSET(0)] AS a 
 FROM  
     `cohortanalysis-343816.RetailSales.retailsales` AS rs 
 GROUP BY  
