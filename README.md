@@ -27,12 +27,19 @@ The dataset has around 500000 rows, which represent transactions between 01/12/2
 Fields:
 
 InvoiceNo: Invoice number which is unique to each transaction.
+
 StockCode: Product code which is unique to each product.
+
 Description: Name of the product.
+
 Quantity: The quantity of items sold per product.
+
 InvoiceDate: The date and time in which the transaction occurred.
+
 UnitPrice: Unit price for each of the units sold.
+
 CustomerID: Unique number assigned to each customer.
+
 Country: Name of the country where the customer resides.
 
 
