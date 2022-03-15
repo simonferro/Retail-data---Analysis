@@ -10,11 +10,15 @@ The objective of this analysis will be two-fold. First, we will generate a cohor
 
 **Cohort Analysis and RFM Analysis**
 
-*Cohort Analysis:* Cohort analysis is a technique used for analyzing the behavior of a certain group of customers over time. This group of customers will have a common, shared attributed which allows their grouping. Commonly, this attribute is the first purchase or first login date, however attributes like channel, country, etc. can be used to group the customers. The cohort analysis will allow us to see the progression in time of a certain metric for the different groups of customers, helping us spot which groups might be better, where common patterns may occur, and to spot one-off events 
+*Cohort Analysis:* 
+
+Cohort analysis is a technique used for analyzing the behavior of a certain group of customers over time. This group of customers will have a common, shared attributed which allows their grouping. Commonly, this attribute is the first purchase or first login date, however attributes like channel, country, etc. can be used to group the customers. The cohort analysis will allow us to see the progression in time of a certain metric for the different groups of customers, helping us spot which groups might be better, where common patterns may occur, and to spot one-off events 
 
 This cohort analysis can be done from a user or from a net dollar view, and it can represent the retention compared to the first period or the total values (ex. Total customers in period n)
 
-*RFM Analysis:* RFM analysis is a common methodology used in industries where purchases are not recurrent. Contrary to what happens for SAAS businesses, retail and commerce businesses do not receive a predictable, consistent periodical payment from their customers. Instead, purchases are one-off, and the purchase frequency can vary significantly between customers. RFM analysis proposes a split between customers based on 3 different attributes calculated from their orders: Frequency, Recency and Monetary value. The recency refers to how much time passed since a customers' last order, while monetary value refers to the total value received from the customer in the studied period. Frequency is related to the total number of orders in the period studied for a specific customer.
+*RFM Analysis:* 
+
+RFM analysis is a common methodology used in industries where purchases are not recurrent. Contrary to what happens for SAAS businesses, retail and commerce businesses do not receive a predictable, consistent periodical payment from their customers. Instead, purchases are one-off, and the purchase frequency can vary significantly between customers. RFM analysis proposes a split between customers based on 3 different attributes calculated from their orders: Frequency, Recency and Monetary value. The recency refers to how much time passed since a customers' last order, while monetary value refers to the total value received from the customer in the studied period. Frequency is related to the total number of orders in the period studied for a specific customer.
 
 Based on these three properties, customers are then split into different segments, where each segment can be analyzed separately . For example, customers with high monetary value but who purchased a long time ago might be good candidates for a promotional message, while users with high frequency and recency but low monetary value could be targeted with cross-selling initiatives. 
 
