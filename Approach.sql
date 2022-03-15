@@ -1,4 +1,4 @@
-**Approach**
+/* Approach
 
 We can start by analyzing the purchasing behavior of customers through a cohort analysis, which can be done based on the raw tables using any SQL engine.
 
@@ -11,6 +11,8 @@ on the other hand we use years as the periods, the timeframe might not be long e
 
 Using ARRAY_AGG we can extract the row representing the first purchase for each user:
 
+/* 
+
 WITH first_purchase AS 
 ( 
 SELECT 
@@ -21,7 +23,8 @@ GROUP BY
     CustomerID 
 ) 
  
-And afterwards get the date and customerId from that first purchase. 
+/* And afterwards get the date and customerId from that first purchase. 
+*/
  
 , first_cohort AS 
 ( 
