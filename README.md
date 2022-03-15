@@ -24,7 +24,7 @@ Based on these three properties, customers are then split into different segment
 
 In most applications of RFM, customers are split into four bins for each of the three "features", therefore, there are 64 different buckets where a customer could be placed in this RFM "3D" space. In general, the split between the four buckets for each of the features is based on percentiles.
 
-**Understanding of the Dataset**
+**Understanding the Dataset**
 
 The dataset has around 500000 rows, which represent transactions between 01/12/2010 and 09/12/2011. Nonetheless, around 100k transactions have a null CustomerId. Each row in the dataset represents a product sold. Therefore, there can be multiple lines for each unique purchase if the purchase is composed of multiple items 
 
