@@ -27,7 +27,7 @@ GROUP BY
 ) 
  
 /* 
-From these rows, we can get the date and customerId of that first purchase. 
+From these rows, we can get the date and customerId of that first purchase in order to user them later on.
 */
  
 , first_cohort AS 
@@ -40,6 +40,10 @@ FROM
 
 /*
 
+An important caveat is that we need to make sure that for every cohort, every period n inside the timeframe analyzed is displayed. If the cohort is very small or the amount of time analyzed is very large, 
+there might be cases where a period n has no purchases. This would mean that when generating the final table, there would be no cell for period n for that specific cohort.
+Therefore, what we need to do is generate an array of all possible dates between the first invoice date and the last date we want to analyze, which in this case is the date of
+the last invoice. This will ensure that for every cohort, we have every period available, even if the value (for amount sold or for customers retained) is 0.
 
 */
 all_cohort_dates AS 
@@ -57,7 +61,18 @@ FROM
                  INTERVAL 1 month 
             )  
         ) AS month 
-), cohorted_purchases AS 
+), 
+
+/*
+Now that we have all possible cohort dates, we can use this as a basis for starting to generate our final output. We take this list of all possible dates and join the original 
+table with all invoices to it. Finally, we also join the date of the first invoice for that customer which we calculated before. The output would therefore be a table where
+every invoice has an additional column called initial cohort, which has the period (month) where that customer first purchased, and another column called period_diff, which is the difference
+in periods (months) between that invoice and the date of the first purchase. Additionally, since we joined this information to the list of all possible dates mentioned above, any month
+that did not have any invoice available will still be present.
+
+*/
+
+cohorted_purchases AS 
 ( 
 SELECT  
     cd.*,rs.*,DATE_TRUNC(DATE(fc.InvoiceDate),month) AS initial_cohort,DATE_DIFF(DATE(rs.InvoiceDate), DATE(fc.InvoiceDate), month ) AS period_diff 
@@ -70,6 +85,15 @@ LEFT JOIN
 WHERE  
     rs.CustomerID IS NOT NULL 
 ), 
+
+/*
+Lastly, from this "augmented" table of invoices above we can now group by the initial cohort and the period difference, such that we have an aggregate of all distinct customers
+and total amount purchased for every combination of initial cohort (first month of purchase) and period difference (months after that initial purchase). The output of this
+will be a table with four columns: The date (month) of the initial cohort, the period difference since that date, and the amount of distinct customers and total purchases for
+that combination of cohort and period difference.
+
+*/
+
 values_pre_pivot_total AS 
 ( 
 SELECT  
@@ -81,6 +105,16 @@ GROUP BY
 ORDER BY  
     initial_cohort ASC, period_diff ASC 
 ), 
+
+/*
+As a last step before pivoting, we take this input from above and we join it with the values for the first period for every cohort. This way, we can use the values from the joined table 
+in order to calculate percentages. What this means is that for any row with initial_cohort x and period difference y, we "attach" two additional columns, which are the amount
+of distinct customers that purchased for that initial cohort when the period difference was 0 (in the initial month), and the total amount purchased in that first month. That way,
+we can divide the values of total customers at period n and total amount purchased at period n by the value of total customers at period 0 and total amount purchased at period 0, such
+that we can calculate retention.
+
+*/
+
 values_pre_pivot AS 
 ( 
 SELECT 
@@ -105,6 +139,15 @@ LEFT JOIN
     ) AS sub 
 ON sub.initial_cohort=vpp.initial_cohort 
 ) 
+
+/*
+To generate the final input, from the table above we get the initial cohort, the period difference, and the column for value of interest, which could be: Total customers retained, percentage
+of customers retained, total dollars retained or percentage of dollars retained. If we just took these 3 columns we would still have a table in long format (every row has a value
+for initial cohort, period difference and the value of interest). Since we need a table in wide format, we must pivot the values. This allows us to have a table where the rows are the 
+initial cohort, the columns are the period difference, and the value of each cell is the value of interest.
+
+*/
+
 SELECT 
     *  
 FROM -- without this inner select the pivot also gets total_purchases and each total purchase creates an additional row 
@@ -116,4 +159,9 @@ FROM -- without this inner select the pivot also gets total_purchases and each t
         values_pre_pivot) 
 PIVOT 
     (SUM(customer_retention) FOR period_diff IN (0,1,2,3,4,5,6,7,8,9,10,11,12,13))  AS period 
+    
+/*
+If we need to change the value of interest, we just need to change the third column we extract from the select statement above
+
+*/
 
