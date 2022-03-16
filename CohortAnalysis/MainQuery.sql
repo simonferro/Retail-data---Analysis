@@ -1,3 +1,7 @@
+/* 
+This is the complete query used to generate the cohort analysis. The last query, which would output the pivoted final values, is ommited in this document and is replaced by the statement
+"select * from values_pre_pivot" since depending on the value of interest this last query would change. The possible variations of this last query are added in another document.
+*/
 
 WITH first_purchase AS
 (
