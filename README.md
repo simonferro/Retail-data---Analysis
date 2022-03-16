@@ -63,6 +63,7 @@ https://towardsdatascience.com/who-is-your-golden-goose-cohort-analysis-50c9de5d
 https://towardsdatascience.com/how-to-design-real-time-cohort-analysis-in-python-sql-tableau-1df527c19b7e
 https://rittmananalytics.com/blog/2021/6/20/rfm-analysis-and-customer-segmentation-using-looker-dbt-and-google-bigquery
 https://www.r-bloggers.com/2019/07/customer-segmentation-using-rfm-analysis/
+https://iglooanalytics.com/blog/cohort-analysis-in-tableau.html
 
 Done:
 https://www.sciencedirect.com/science/article/pii/S1877050910003868
