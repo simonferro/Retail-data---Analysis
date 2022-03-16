@@ -1,4 +1,4 @@
-# Retail-data---Analysis
+# Retail-data: Cohort and RFM Analysis
 
 **Introduction**
 
