@@ -191,10 +191,24 @@ than for the previous month.
 
 As for the analysis of our actual results, we can see that there is first a worrying trend regarding the decrease in amount for newer cohorts. This means that the
 number of customers in month 0 and the amount of dollars purchased in month 0 are decreasing with time. As we also see, there is mixed performance for retention
-(of both dollars and customers) with time. There is no clear pattern showing that retention is improving over time (as we move down on a fixed column) and this happens
-both for dollar retention and customer retention.
+(of both dollars and customers) with time. There is no clear pattern showing that retention is improving over time (meaning that for period 1, as we move down on a 
+fixed column, retention does not improve for that period) and this happens both for dollar retention and customer retention.
 
-We see that there is higher dollar retention than customer retention, meaning that the amount spent by customers that stay is higher than average, as it offsets the...
+It is important to also note that there is an interesting trend in retention happening for most cohorts. While the initial dropoff in retention after period 0 is of 
+approximately 85% -meaning that after 1 period 85% of customers do not come back- customers start coming back again after period 1, which results in higher retention 
+values for periods after period 1 in most cohorts both for customer and dollar retention. It is positive to see that retention stabilizes between 0.25 
+and 0.4 for most cohorts in both cases (dollar and customer retention) as this shows that after a certain point, most customers keep coming back to buy. This 
+observation is more common in the SAAS industry where customers pay periodically, but we can draw a simile with what is happening with these cohorts and assume that
+after the large dropoff to 0.25-0.4 in period 1, most customers that remained for period 1 end up remaining for much longer.
+
+Lastly, we see that there is higher dollar retention than customer retention, meaning that the amount spent by customers that stay is higher than what they initially
+purchased, or that the customers who spend the most are the ones who stay. It would not be clear which of these could be the reason, but a cohort analysis by
+first purchase value could give us an idea on whether the second hypothesis is valid. The important takeaway in this case is that for most periods and cohorts,
+the amount of dollars retained are larger than the amount of customers retained. For example, in period 7, the average customer retention is of around 25% while the
+average dollar retention is around 35%. Drawing similes with the case of the SAAS industry, this is positive as it means customers are buying more in subsequent months.
+
+As can be seen from this analysis, cohort retention is a very important and useful tool for understanding the purchase behavior and the overall retention of customers,
+and can be generated easily with some SQL knowledge.
 
 */
 
