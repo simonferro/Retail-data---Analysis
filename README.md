@@ -48,7 +48,7 @@ Country: Name of the country where the customer resides.
 
 **Approach:**
 
-An explanation regarding the process for creating both the cohort analysis and the RFM analysis is available in the file called "Approach", while the queries used in the different analysis are in the folder "Queries".
+An explanation regarding the process for creating both the cohort analysis and the RFM analysis is available in the file called "Approach", while the queries used in the different analysis are in the folder "Queries" inside the RFM and Cohort analysis folders.
 
 **Sources**:
 
