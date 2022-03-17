@@ -53,23 +53,37 @@ An explanation regarding the process for creating both the cohort analysis and t
 **Sources**:
 
 Missing:
-combined rfm score, name of the categories
-https://en.digital/blog/analizando-recurrencia-compra-ecommerce-fidelizacion-rfm/1603
+Treemap visualization
+https://joaocorreia.io/blog/rfm-analysis-increase-sales-by-segmenting-your-customers.html
+https://rittmananalytics.com/blog/2021/6/20/rfm-analysis-and-customer-segmentation-using-looker-dbt-and-google-bigquery
+
+
+
 https://medium.com/@designbynattapong/customer-analytics-and-cohort-analysis-2fbbbba79783
 https://medium.com/@ulasturker/customer-life-time-value-calculations-with-python-cltv-with-crm-analytics-2-in-data-science-7d39ca9ad2de
-https://medium.com/@rafiqairwandi/rfm-analysis-using-postgresql-2e5c1fe42d6
-https://joaocorreia.io/blog/rfm-analysis-increase-sales-by-segmenting-your-customers.html
-https://towardsdatascience.com/who-is-your-golden-goose-cohort-analysis-50c9de5dbd31
-https://towardsdatascience.com/how-to-design-real-time-cohort-analysis-in-python-sql-tableau-1df527c19b7e
-https://rittmananalytics.com/blog/2021/6/20/rfm-analysis-and-customer-segmentation-using-looker-dbt-and-google-bigquery
 https://www.r-bloggers.com/2019/07/customer-segmentation-using-rfm-analysis/
-https://iglooanalytics.com/blog/cohort-analysis-in-tableau.html
 
 Sources:
 
+https://en.digital/blog/analizando-recurrencia-compra-ecommerce-fidelizacion-rfm/1603
 
 https://www.sciencedirect.com/science/article/pii/S1877050910003868
 
 https://medium.com/swlh/customer-segmentation-in-online-retail-cohort-analysis-eb352085e64b
 
 http://www.silota.com/docs/recipes/sql-recency-frequency-monetary-rfm-customer-analysis.html
+
+https://iglooanalytics.com/blog/cohort-analysis-in-tableau.html
+
+https://towardsdatascience.com/how-to-design-real-time-cohort-analysis-in-python-sql-tableau-1df527c19b7e
+
+https://medium.com/@rafiqairwandi/rfm-analysis-using-postgresql-2e5c1fe42d6
+
+https://python.plainenglish.io/customer-segmentation-with-rfm-ebba76bfe9f6
+
+https://towardsdatascience.com/who-is-your-golden-goose-cohort-analysis-50c9de5dbd31
+
+
+
+
+
