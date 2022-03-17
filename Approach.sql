@@ -8,6 +8,8 @@ date and the respective column. Each cell represents the amount/percentage of us
 In this file, I will go through the process of creating the cohort analysis and link the respective query for that step immediately below. Keep in mind that the actual
 SQL code you would run would have all the specific steps together, and I prefer writing each step as a subquery. You can see this file in the CohortAnalysis folder.
 
+Finally, if you are interested in viewing the results, you can scroll to the bottom of the document, where there is a link to a tableau visualization with the results.
+
 The first thing we can do in SQL is calculate the first_purchase for each user. In this case, I have used a function from bigquery called ARRAY_AGG. It is important to mention that
 the choice of period for this analysis is critical. If we choose a very short period, such as days, the values will fluctuate a lot and will be very small compared to the initial cohort size. If
 on the other hand we use years as the periods, the timeframe might not be long enough to get meaningful insights. In this analysis we will use months as period.
@@ -162,6 +164,37 @@ PIVOT
     
 /*
 If we need to change the value of interest, we just need to change the third column we extract from the select statement above
+
+*/
+
+/*
+Finally, the last step is just to create a visualization of this output in a BI tool, either by manually downloading and uploading the results (not recommended) but
+preferably by setting up a table based on a recurrent query. This way, this query will be run periodically (say daily, or weekly) and the results will be added to a
+table which is connected to a BI tool. This way, your stakeholders will always be able to have up to date results. Keep in mind that if you do this, the periods
+in the last subquery must be generated dynamically or the raw data must be "truncated" in order to only analyze the last x periods.
+
+The results of this analysis can be seen here: https://public.tableau.com/app/profile/simon.f1147/viz/CohortAnalysis_16474156277330/Sheet1 
+
+Before discussing the results, it is important to quickly explain what is going on in this visualization. Every row is a cohort (a group of customers that share a 
+common attribute - in this case the date of first purchase) and each column is a period since their period zero (in this case, the periods are months). Therefore, 
+period 2 for the first cohort is the same month as period 1 for the second cohort and as period 0 for the third cohort. In this sense, diagonals can be used to 
+see any one-off events that affected all cohorts (such as product outages or macroeconomic events). 
+
+Regarding the analysis row-wise and column wise, we would expect to see increasing retention as we move down a column. This is because we are comparing the same 
+period since their first purchase for all cohorts, and we expect this retention to increase if the product is improving. On the other hand, what happens row wise
+depends a lot on the business and state of the company. We expect that customer based retention will decrease over time for a cohort (along the row), which is normal
+as customers start dropping off with time. However, depending on the company, we would expect dollar based retention to be over 100%, at least for SAAS businesses,
+given that the money from customer expansions more than offsets churn from old customers. To summarize, along each row (for customer retention) we would expect 
+retention to fall with time, but we would like to see that each newer cohort (row) has retention that is decreasing less with time. One last thing to mention, is that
+we would always want to see increasing cohort sizes as we check the first column moving down. This means that every month that passes, there are more new customers
+than for the previous month.
+
+As for the analysis of our actual results, we can see that there is first a worrying trend regarding the decrease in amount for newer cohorts. This means that the
+number of customers in month 0 and the amount of dollars purchased in month 0 are decreasing with time. As we also see, there is mixed performance for retention
+(of both dollars and customers) with time. There is no clear pattern showing that retention is improving over time (as we move down on a fixed column) and this happens
+both for dollar retention and customer retention.
+
+We see that there is higher dollar retention than customer retention, meaning that the amount spent by customers that stay is higher than average, as it offsets the...
 
 */
 
