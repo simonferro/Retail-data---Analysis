@@ -65,7 +65,11 @@ https://rittmananalytics.com/blog/2021/6/20/rfm-analysis-and-customer-segmentati
 https://www.r-bloggers.com/2019/07/customer-segmentation-using-rfm-analysis/
 https://iglooanalytics.com/blog/cohort-analysis-in-tableau.html
 
-Done:
+Sources:
+
+
 https://www.sciencedirect.com/science/article/pii/S1877050910003868
+
 https://medium.com/swlh/customer-segmentation-in-online-retail-cohort-analysis-eb352085e64b
+
 http://www.silota.com/docs/recipes/sql-recency-frequency-monetary-rfm-customer-analysis.html
