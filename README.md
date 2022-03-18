@@ -53,15 +53,8 @@ An explanation regarding the process for creating both the cohort analysis and t
 **Sources**:
 
 Missing:
-Treemap visualization
-https://joaocorreia.io/blog/rfm-analysis-increase-sales-by-segmenting-your-customers.html
-https://rittmananalytics.com/blog/2021/6/20/rfm-analysis-and-customer-segmentation-using-looker-dbt-and-google-bigquery
+Treemap visualization for percent of monetary value and percent of customers, number of customers per number of order, number of customers and monetary value per segment, change average for median, distribution of monetary scores for every combination of recency and frequency through 5x5 matrix of bar charts, plot with segmentation of total spending by each of the 5 segments in each of the 3 scores, plots of one score vs another, histogram of distribution of orders by frequency, then recency, then monetary, table with number of clients for each combination of both scores
 
-
-
-https://medium.com/@designbynattapong/customer-analytics-and-cohort-analysis-2fbbbba79783
-https://medium.com/@ulasturker/customer-life-time-value-calculations-with-python-cltv-with-crm-analytics-2-in-data-science-7d39ca9ad2de
-https://www.r-bloggers.com/2019/07/customer-segmentation-using-rfm-analysis/
 
 Sources:
 
@@ -83,7 +76,12 @@ https://python.plainenglish.io/customer-segmentation-with-rfm-ebba76bfe9f6
 
 https://towardsdatascience.com/who-is-your-golden-goose-cohort-analysis-50c9de5dbd31
 
+https://www.r-bloggers.com/2019/07/customer-segmentation-using-rfm-analysis/
 
+https://medium.com/@designbynattapong/customer-analytics-and-cohort-analysis-2fbbbba79783
 
+https://joaocorreia.io/blog/rfm-analysis-increase-sales-by-segmenting-your-customers.html
+
+https://rittmananalytics.com/blog/2021/6/20/rfm-analysis-and-customer-segmentation-using-looker-dbt-and-google-bigquery
 
 
